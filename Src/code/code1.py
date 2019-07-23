@@ -47,7 +47,7 @@ print(train[0])
 
 train_loader = DataLoader(train, batch_size=16, shuffle=True)
 
-model = Net()
+model = Net() #
 
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr = 0.01)
