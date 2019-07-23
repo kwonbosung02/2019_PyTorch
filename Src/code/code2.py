@@ -11,23 +11,23 @@ import numpy
 import pandas as pd
 
 class Net(nn.Module):
-def __init__(self):
-super(Net, self).__init__()
-self.fc1 = nn.Linear(13, 96)
-self.fc2 = nn.Linear(96, 96)
-self.fc3 = nn.Linear(96, 96)
-self.fc4 = nn.Linear(96, 96)
-self.fc5 = nn.Linear(96, 96)
-self.fc6 = nn.Linear(96, 2)
+    def __init__(self):
+        super(Net, self).__init__()
+        self.fc1 = nn.Linear(13, 96)
+        self.fc2 = nn.Linear(96, 96)
+        self.fc3 = nn.Linear(96, 96)
+        self.fc4 = nn.Linear(96, 96)
+        self.fc5 = nn.Linear(96, 96)
+        self.fc6 = nn.Linear(96, 2)
 
-def forward(self, x):
-x = F.relu(self.fc1(x))
-x = F.relu(self.fc2(x))
-x = F.relu(self.fc3(x))
-x = F.relu(self.fc4(x))
-x = F.relu(self.fc5(x))
-x = self.fc6(x)
-return F.log_softmax(x)
+    def forward(self, x):
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = F.relu(self.fc3(x))
+        x = F.relu(self.fc4(x))
+        x = F.relu(self.fc5(x))
+        x = self.fc6(x)
+        return F.log_softmax(x)
 
 wine = load_wine()
 pd.DataFrame(wine.data, columns=wine.feature_names)
@@ -59,20 +59,20 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(model.parameters(), lr = 0.01)
 
 for epoch in range(300):
-total_loss = 0
+    total_loss = 0
 
-for train_x, train_y in train_loader:
+    for train_x, train_y in train_loader:
 
-train_x, train_y = Variable(train_x), Variable(train_y)
-optimizer.zero_grad()
-output = model(train_x)
-loss = criterion(output, train_y)
-loss.backward()
-optimizer.step()
+        train_x, train_y = Variable(train_x), Variable(train_y)
+        optimizer.zero_grad()
+        output = model(train_x)
+        loss = criterion(output, train_y)
+        loss.backward()
+        optimizer.step()
 
-total_loss += loss.data
+        total_loss += loss.data
 
-print(epoch+1,total_loss)
+    print(epoch+1,total_loss)
 
 test_x, test_y = Variable(test_X), Variable(test_Y)
 

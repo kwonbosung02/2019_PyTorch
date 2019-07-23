@@ -27,7 +27,8 @@ pd.DataFrame(wine.data, columns=wine.feature_names)
 wine_data = wine.data[0:130]
 wine_target = wine.target[0:130]
 
-train_X, test_X, train_Y, test_Y = 
+
+train_X, test_X, train_Y, test_Y = train_test_split(wine_data,wine_target,test_size=0.2)
 train_test_split(wine_data,wine_target,test_size=0.2)
 
 train_X = torch.from_numpy(train_X).float()
@@ -71,7 +72,7 @@ test_x, test_y = Variable(test_X), Variable(test_Y)
 
 result = torch.max(model(test_x).data,1)[1]
 
-accuracy = sum(test_y.data.numpy() == result.numpy()) / 
+accuracy = sum(test_y.data.numpy() == result.numpy())
 len(test_y.data.numpy())
 
 print(accuracy)
